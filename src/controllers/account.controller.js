@@ -4,13 +4,16 @@ const User = mongoose.model('User');
 const jwt = require('../services/jwt.service');
 
 const Register = async(req, res) => {
-    const { email, password, first_name, last_name } = req.body;
+    const { code, name, email, password, activate, birth_date, category } = req.body;
     try {
         const user = new User({
+            code,
+            name,
             email,
             password,
-            first_name,
-            last_name
+            activate,
+            birth_date,
+            category
         });
         await user.save();
         return res.status(201).send({
@@ -52,13 +55,17 @@ const Authenticate = async(req,res) => {
 };
 
 const Edit = async(req,res) => {
-    const { password, first_name, last_name } = req.body;
+    const { code, name, email, password, activate, birth_date, category } = req.body;
     const id = req.params.id;
     try {
         const user = await User.findById(id);
-        user.first_name = first_name;
-        user.last_name = last_name;
+        user.code = code;
+        user.name = name;
+        user.email = email;
         user.password = password;
+        user.activate = activate;
+        user.birth_date = birth_date;
+        user.category = category;
         await user.save();
 
         return res.status(200).send({

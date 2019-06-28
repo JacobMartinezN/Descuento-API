@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 app.use('/api', AccountRoutes);
 
 //Conection to database and run application
-const port = process.env.PORT || 8001;
+const port = process.env.PORT || 3000;
 const uri = 'mongodb+srv://user:Martinez48400161@jmcluster-aob61.mongodb.net/test?retryWrites=true';
 const options = {
     useCreateIndex: true,
